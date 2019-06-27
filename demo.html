@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If, If-else, if lồng nhau</title>
+</head>
+<p><strong>Mô tả</strong></p>
+<p>Bài 1: Nhập vào hai số a và b, và kiểm tra xem a có chia hết cho b hay không</p>
+<button onclick="checkNumber()">Click me!</button>
+
+<p>Bài 2: Nhập tuổi và in ra kết quả nếu tuổi học sinh đó không đủ điều kiện vào học lớp 10.</p>
+<button onclick="checkYearOldStudent()">Excercise 2</button>
+
+<p>Bài 3: Nhập một số nguyên bất kỳ và in kết quả ra màn hình để nói cho người dùng biết số đó là lớn hay nhỏ hơn 0</p>
+<button onclick="checkIntegerNumber()">Excercise 3</button>
+
+<p>Bài 4: Nhập 3 số nguyên và tìm giá trị lớn nhất của ba số nguyên đó</p>
+<button onclick="checkMaxNumber()">Excercise 4</button>
+<p id="result">kết quả là</p>
+
+<p>Bài 5: Xếp hạng học lực của học sinh dựa trên các điểm bài kiểm tra, điểm thi giữa kỳ, điểm thi cuối kỳ</p>
+<button onclick="academicRatings()">Excercise 5</button>
+<p id="diemtrungbinh">điểm trung bình là</p>
+
+<p>Bài 6: Tính hoa hồng nhận được tuỳ theo mức doanh số bán hàng</p>
+<input type="text" id="sales"></input>
+<button onclick="salary()">tính</button>
+<input type="text" id="rose"></input>
+
+<p>Bài 7: Tính cước điện thoại cho một hộ gia đình với các thông số đã cho</p>
+<button onclick="cuocThang()">Excercise 7</button>
+<p id="sotien"></p>
+<script>
+    function checkNumber() {
+        let numberA = parseInt(prompt("Enter the First number here!"));
+        let numberB = parseInt(prompt("Enter the Second number here! "));
+        let result = numberA % numberB == 0;
+        if (result) {
+            alert(numberA + ' is multiple of ' + numberB);
+        }else{
+            alert("Enter a number repeat");
+        }
+    }
+
+    function checkYearOldStudent() {
+        let year_Old_Input = parseInt(prompt("Enter a Year old here! "));
+        let age_into_grade_10 = 15;
+        if (year_Old_Input < age_into_grade_10) {
+            alert("not eligible for 10th grade");
+        }
+    }
+
+    function checkIntegerNumber() {
+        let number_Input = parseInt(prompt("Enter a number here "));
+        let result = number_Input > 0;
+        if (result) {
+            alert("This number greater than 0");
+        } else {
+            alert("This number less than 0")
+        }
+    }
+
+    function checkMaxNumber() {
+
+        let first_number = parseInt(prompt("Enter the First number here "));
+        let second_number = parseInt(prompt("Enter the Second number here"));
+        let third_number = parseInt(prompt("Enter the Third number here"));
+        let max = first_number;
+        if (max < second_number) {
+            max = second_number;
+            document.getElementById("result").innerHTML = max;
+            if (max < third_number) {
+                max = third_number;
+                document.getElementById("result").innerHTML = max;
+            } else {
+                document.getElementById("result").innerHTML = max;
+
+            }
+
+        }
+    }
+
+    function academicRatings() {
+        let diem_kiem_tra = parseFloat(prompt("Enter the test mark here"));
+        let diem_kiem_tra_giua_ky = parseFloat(prompt("Enter the test mark here"));
+        let diem_kiem_tra_cuoi_ky = parseFloat(prompt("Enter the test mark here"));
+        let diem_trung_binh = (diem_kiem_tra + diem_kiem_tra_giua_ky * 2 + diem_kiem_tra_cuoi_ky * 3) / 6;
+        const GIOI = 8.0;
+        const KHA = 6.5;
+        const TRUNG_BINH = 5.0;
+        if (diem_trung_binh > GIOI || diem_trung_binh == GIOI) {
+            let a = "gioi";
+            document.getElementById("diemtrungbinh").innerHTML = diem_trung_binh + " xep loai " + a;
+        } else if (diem_trung_binh > KHA || diem_trung_binh == KHA) {
+            a = "kha";
+            document.getElementById("diemtrungbinh").innerHTML = diem_trung_binh + " xep loai " + a;
+        } else if (diem_trung_binh > TRUNG_BINH || diem_trung_binh == TRUNG_BINH) {
+            a = "trung binh";
+            document.getElementById("diemtrungbinh").innerHTML = diem_trung_binh + " xep loai " + a;
+        } else {
+            a = "yếu kém";
+            document.getElementById("diemtrungbinh").innerHTML = diem_trung_binh + " xep loai " + a;
+        }
+    }
+
+    function salary() {
+        let salesInput = parseFloat(document.getElementById("sales").value);
+        const ROSE_LEVEL_ONE = 0.35;
+        const ROSE_LEVEL_TRUE = 0.38;
+        const ROSE_LEVEL_THREE = 0.40;
+        const ROSE_LEVEL_FOUR = 0.42;
+        const SALES_one = 3000000;
+        const SALES_true = 8000000;
+        const SALES_three = 15000000;
+        const SALES_four = 20000000;
+        if (salesInput < SALES_one) {
+            document.getElementById("rose").value = "Revenue is not enough";
+        } else if (SALES_one || salesInput < SALES_true) {
+            let roseOne = salesInput * ROSE_LEVEL_ONE;
+            document.getElementById("rose").value = roseOne + "VND";
+
+            if (SALES_true || salesInput < SALES_three) {
+                let roseTrue = salesInput * ROSE_LEVEL_TRUE;
+                document.getElementById("rose").value = roseTrue + "VND";
+
+                if (SALES_three || salesInput < SALES_four) {
+                    let roseThree = salesInput * ROSE_LEVEL_THREE;
+                    document.getElementById("rose").value = roseThree + "VND";
+
+                    if (SALES_four || salesInput > SALES_four) {
+                        let roseFour = salesInput * ROSE_LEVEL_FOUR;
+                        document.getElementById("rose").value = roseFour + "VND";
+                    }
+
+                }
+            }
+        }
+    }
+    function cuocThang() {
+        let soPhutMotThang=parseInt(prompt("Nhap vao so phut goi trong thang"));
+        let tongTienCuoc=soPhutMotThang*200;
+        document.getElementById("sotien").innerHTML="so tien cuoc trong thang "+tongTienCuoc+ " VND";
+    }
+</Script>
+
+</body>
+</html>
